@@ -1,0 +1,17 @@
+volumes:
+  data_taskflow:
+
+services:
+  mongo:
+    image: mongo
+    volumes:
+     - data_taskflow:/data/db
+  
+  taskflow-backend:
+    build: .          # what tells compose "use my Dockerfile in this folder"?
+    ports:
+      - "8000:8000"        # same format as -p from docker run
+    env_file:
+       - .env             # same idea as --env-file, just the filename
+    depends_on:
+      - mongo             # the service name it should wait for
