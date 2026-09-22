@@ -1,14 +1,8 @@
-
-
 import express from "express"
 // import { data } from './data.js';
 
-import { Task } from './models/Task.js';
-import { User } from './models/User.js';
-import { title,id_check } from './validation.js';
-import { hash_password,verify_password } from './hashing.js';
-import jwt from "jsonwebtoken"
-import { protect } from './protect.js';
+import authRoutes from "./routes/authRoutes.js"
+import taskRoutes from "./routes/taskRoutes.js"
 
 
 
@@ -22,6 +16,8 @@ app.get("/",(req,res)=> {
 })
 
 
+app.use("/api/auth",authRoutes)
+app.use("/api/tasks",taskRoutes)
 
 
 app.use((error,req,res,next)=>{

@@ -1,6 +1,6 @@
-import {User} from "../models/User"
-import {hash_password} from "../utils/hashing"
-import { verify_password } from "../utils/hashing"
+import {User} from "../models/User.js"
+import {hash_password,verify_password} from "../utils/hashing.js"
+// import { verify_password } from "../utils/hashing"
 import jwt from "jsonwebtoken"
 
 
@@ -40,7 +40,6 @@ export const Signin = async(req,res)=>{
         message: "Authentication successful!",
         token: token 
     });
-
-    
+  
 
 }

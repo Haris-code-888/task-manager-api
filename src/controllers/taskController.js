@@ -1,11 +1,18 @@
 
-
-import { Task } from "../models/Task";
-
+import { Task } from "../models/Task.js";
 
 
+export const getTasks = async (req, res) => {
+  try {
+    const tasks = await Task.find({ user: req.user.id });
+    return res.status(200).json(tasks);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
 
-const getTaskById = async(req,res)=>{
+
+export const getTaskById = async(req,res)=>{
 
     const tasks = await Task.find({ user: req.user.id });  // check this not done by you
 
@@ -14,7 +21,7 @@ const getTaskById = async(req,res)=>{
 }
 
 
-const createTask = async(req,res)=>{
+export const createTask = async(req,res)=>{
 
         // const data = req.body;
         const taskData = { ...req.body, user: req.user.id };
@@ -24,7 +31,7 @@ const createTask = async(req,res)=>{
 
 }
 
-const updateTaskById = async(req,res)=>{
+export const updateTask = async(req,res)=>{
 
    
             const id = req.params.task_id
@@ -44,7 +51,7 @@ const updateTaskById = async(req,res)=>{
 }
 
 
-const deleteTaskById = async(req,res)=>{
+export const deleteTask = async(req,res)=>{
    
         const id = req.params.task_id
 
