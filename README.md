@@ -1,58 +1,33 @@
-# Task Management API
+# Task Manager API
 
-A simple Express REST API to manage user-specific tasks secured with JWT.
+A RESTful backend API built with Node.js, Express, and MongoDB that allows users to create, read, update, and delete tasks with authentication, filtering, and pagination.
 
-## Setup Instructions
+---
 
-1. Clone the repository and install dependencies:
+## Tech Stack
+
+* **Runtime:** Node.js
+* **Framework:** Express.js
+* **Database:** MongoDB (via Mongoose ORM)
+* **Testing:** Jest & Supertest
+* **Authentication:** JSON Web Tokens (JWT)
+
+---
+
+## Getting Started Locally
+
+Follow these steps to run this project on your computer.
+
+### Prerequisites
+
+Make sure you have installed:
+* [Node.js](https://nodejs.org/) (v16 or higher)
+* [Git](https://git-scm.com/)
+* A running MongoDB instance (Local or MongoDB Atlas)
+
+### Installation
+
+1. **Clone the repository:**
    ```bash
-   npm install
-   ```
-2. Create a `.env` file in the root folder and add your variables:
-   ```env
-   PORT=5000
-   MONGO_URI=your_mongodb_connection_string
-   JWT_SECRET=your_super_secret_jwt_key
-   ```
-3. Start the server:
-   ```bash
-   npm start
-   ```
-
-## API Endpoints & Examples
-
-### 1. Create a Task
-* **URL:** `POST /api/tasks`
-* **Headers:** `Authorization: Bearer <your_jwt_token>`
-* **Body (JSON):**
-  ```json
-  {
-    "title": "Buy groceries"
-  }
-  ```
-* **Response (201 Created):**
-  ```json
-  {
-    "_id": "650c8f3b...",
-    "title": "Buy groceries",
-    "completed": false,
-    "user": "650c8d1a...",
-    "createdAt": "2026-09-08T...",
-    "updatedAt": "2026-09-08T..."
-  }
-  ```
-
-### 2. Get My Tasks
-* **URL:** `GET /api/tasks`
-* **Headers:** `Authorization: Bearer <your_jwt_token>`
-* **Response (200 OK):**
-  ```json
-  [
-    {
-      "_id": "650c8f3b...",
-      "title": "Buy groceries",
-      "completed": false,
-      "user": "650c8d1a..."
-    }
-  ]
-  ```
+   git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+   cd your-repo-name

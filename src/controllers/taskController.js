@@ -2,19 +2,47 @@
 import { Task } from "../models/Task.js";
 
 
+// export const getTasks = async (req, res) => {
+//   try {
+//     const tasks = await Task.find({ user: req.user.id });
+//     return res.status(200).json(tasks);
+//   } catch (error) {
+//     return res.status(500).json({ message: error.message });
+//   }
+// };
+
 export const getTasks = async (req, res) => {
   try {
-    const tasks = await Task.find({ user: req.user.id });
+    // 1. Extract query parameters with sensible defaults
+    const { completed, page = 1, limit = 10 } = req.query;
+
+    // 2. Base filter (scope to the authenticated user)
+    const filter = { user: req.user.id };
+
+    // 3. Apply optional filtering (check string explicitly since boolean comes as string)
+    if (completed !== undefined) {
+      filter.completed = completed === "true";
+    }
+
+    // 4. Calculate skip formula: (page - 1) * limit
+    const pageNum = Math.max(1, parseInt(page, 10));
+    const limitNum = Math.max(1, parseInt(limit, 10));
+    const skip = (pageNum - 1) * limitNum;
+
+    // 5. Query Mongoose with filtering, skip, and limit
+    const tasks = await Task.find(filter)
+      .skip(skip)
+      .limit(limitNum);
+
     return res.status(200).json(tasks);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 };
 
-
 export const getTaskById = async(req,res)=>{
 
-    const tasks = await Task.find({ user: req.user.id });  // check this not done by you
+    const tasks = await Task.findOne({ _id: req.params.task_id, user: req.user.id });  // check this not done by you
 
     return res.status(200).json(tasks)
 

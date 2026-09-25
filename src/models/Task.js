@@ -15,7 +15,7 @@ const task_schema = new Schema({
 
     createdAt : {
         type : Date,
-        default : now(),
+        default : Date.now,
     },
 
     user :{
