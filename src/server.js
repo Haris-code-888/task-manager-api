@@ -3,6 +3,7 @@ import 'dotenv/config';
 import { Connecting } from './config/db.js';
 import app from './app.js';
 
+const PORT = process.env.PORT || 8080;   
 
 Connecting(process.env.MONGO_URI)
 
