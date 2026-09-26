@@ -6,6 +6,6 @@ import app from './app.js';
 
 Connecting(process.env.MONGO_URI)
 
-app.listen(process.env.PORT, ()=>{
-    console.log(`Server running on port ${process.env.PORT}`)
-})
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server listening on port ${PORT}`);
+});
